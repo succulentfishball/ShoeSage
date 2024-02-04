@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Shoe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="styleShoe.css" rel="stylesheet">
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="module" src="dbManager2.js"></script>
+    <div class="frame">
+        <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">
+                <img src="https://github.com/succulentfishball/test/blob/main/novablast-removebg-preview.png?raw=true" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <text style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
+                    ShoeSage
+                </text>
+              </a>
+            </div>
+        </nav>
+        <div class="center">
+            <div class="headline">
+                <div class="small">your</div>asics novablast 3
+            </div>
+            <div>
+                <img src="https://github.com/succulentfishball/test/blob/main/novablast-removebg-preview.png?raw=true" alt="Your Shoe" id="img">
+            </div>	
+            <div class="circle-big">
+                <div class="text" id="vue1">
+                    {{ shoeUse }}%<div class="small">through</div>
+                </div>
+                <svg id="progress">
+                    <circle class="bg" cx="57" cy="57" r="52"/>
+                    <circle id="progress-one" cx="57" cy="57" r="52"/>
+                </svg>
+            </div>
+            <div class="circles-small">
+                <div class="circle-small">
+                    <div class="text" id="vue2">
+                        {{ mileage }}<div class="small">km</div>
+                    </div>
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="37"/>
+                        <circle class="progress one" id="progress-two" cx="40" cy="40" r="37"/>
+                    </svg>
+                    <div class="category">
+                        Your Mileage
+                    </div>
+                </div>
+                <div class="circle-small">
+                    <div class="text" id="vue3">
+                        {{ cadence }}<div class="small">rpm</div>
+                    </div>
+                    <svg>
+                        <circle class="bg" cx="40" cy="40" r="37"/>
+                        <circle class="progress two" id="progress-three" cx="40" cy="40" r="37"/>
+                    </svg>
+                    <div class="category">
+                        Cadence
+                    </div>
+                </div>
+            </div>
+            <canvas id="myChart" style="width:100%;height: 200%;max-width:350px; max-height: 150%"></canvas>
+	    <br>
+	<a href="index.html" style="padding: 20px;">
+	  <button class="btn_first" id="return" style="background-color: #aa0434;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;position: relative;">Return</button>
+	</a>	
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the progress-one element
+            const progressOne = document.getElementById('progress-one');
+            console.log(progressOne);
+            const progressTwo = document.getElementById('progress-two');
+            const progressThree = document.getElementById('progress-three');
+
+            // Set the progress value (between 0 and 100)
+            let progressValueOne = 1;
+            if (progressValueOne == 0) {
+                progressValue1 = 0
+            } else {
+                progressValue1 = progressValueOne + 290/(progressValueOne + 20);
+            }
+    
+            // Calculate the dash array based on the progress value
+            const circumferencebig = 64 * 2 * Math.PI; // circumference of the circle
+            const dashArray1 = (progressValue1 / 100) * circumferencebig;
+    
+            // Set the dash array and dash offset as styles
+            progressOne.style.strokeDasharray = `${dashArray1} ${circumferencebig}`;
+    
+            let progressValueTwo = 1;
+            if (progressValueTwo == 0) {
+                progressValue2 = 0
+            } else {
+                progressValue2 = progressValueTwo + 800/(progressValueTwo + 70);
+            }
+    
+            const circumferencesmall = 50 * 2 * Math.PI;
+            const dashArray2 = (progressValue2 / 100) * circumferencesmall;
+    
+            progressTwo.style.strokeDasharray = `${dashArray2} ${circumferencesmall}`;
+    
+            let progressValueThree = 41.8/1.7;
+            if (progressValueThree == 0) {
+                progressValue3 = 0;
+            } else {
+                progressValue3 = progressValueThree + 4000/(progressValueThree + 80);
+            }
+    
+            const dashArray3 = (progressValue3 / 100) * circumferencesmall;
+    
+            progressThree.style.strokeDasharray = `${dashArray3} ${circumferencesmall}`;
+    
+            const xValues = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+            const yValues = [18.5, 24.9, 40.0, 23.03, 45, 24, 26];
+            const barColors = "orange"
+    
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    },
+                    yAxes: [{
+                    ticks: {
+                    stepSize: 10 // Set the interval between each tick on the y-axis
+                    }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: "Mileage from past week/ m"
+                },
+                legend: {
+                    display: false
+                }
+                },
+            });
+        });
+    </script>
+    </div>
+</body>
+

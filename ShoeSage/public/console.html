@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style_console.css" />
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <title>ICHack Project</title>
+</head>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js";
+  import { doc, getDoc, getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjCn2QpsXNxD7Bvdik1RngTiCds4unhbY",
+    authDomain: "ichack24-d0f70.firebaseapp.com",
+    projectId: "ichack24-d0f70",
+    storageBucket: "ichack24-d0f70.appspot.com",
+    messagingSenderId: "123364043667",
+    appId: "1:123364043667:web:2e66acb178ccb95f081666",
+    measurementId: "G-05KH0P1XB4"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  // Initialize Cloud Firestore and get a reference to the service
+  const db = getFirestore(app);
+
+  document.getElementById("resolved1").addEventListener("click", resolved1Remove, false);
+  document.getElementById("resolved2").addEventListener("click", resolved2Remove, false);
+
+  function resolved1Remove(){
+    document.getElementById("resolved1Row").style.display = "none";
+    document.getElementById("resolved1Row").style.visibility = "hidden";
+  }
+
+  function resolved2Remove(){
+    document.getElementById("resolved2Row").style.display = "none";
+    document.getElementById("resolved2Row").style.visibility = "hidden";
+  }
+</script>
+
+<div class="topnav" style="background-color: #333; overflow: hidden;">
+  <a class="active" href="#home" style="float: left; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px;">Console</a>
+  <a href="#news" style="float: right; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px;">Settings</a>
+  <a href="#contact" style="float: right; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px;">Help</a>
+  <a href="#about" style="float: right; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px;">FAQ</a>
+</div>
+
+<div class="row" style="after {content: ""; display: table; clear: both;}>
+  <div class="column" style="float: left; width: 25%; padding-right:100px;">
+  <div class="card">
+    <div class="additional">
+      <div class="user-card">
+        <div class="level center">1SG</div>
+	<img src="/photos/kohpirong.png" style="width:140px; padding-top:50px; padding-left:5px">
+        <div class="points center">642 KM</div>
+      </div>
+      <div class="more-info">
+        <h1>Koh Pi Rong</h1>
+        <div class="coords">
+          <span>Date Of Entry</span>
+          <span>January 2019</span>
+        </div>
+        <div class="coords">
+          <span>Position/Role</span>
+          <span>London, UK</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Shoes</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">4</div>
+          </div>
+          <div>
+            <div class="title">Gait</div>
+            <i class="fa fa-angle-double-down"></i>
+            <div class="value">Heel</div>
+          </div>
+          <div>
+            <div class="title">Cadence</div>
+            <i class="fa fa-group"></i>
+            <div class="value">162</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h1>Koh Pi Rong</h1>
+      <p style="font-size:28px">Shoe Usage: Critical</p>
+      <p style="font-size:22px">Most Used: Asics Novablast 3</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="additional">
+      <div class="user-card">
+        <div class="level center">3SG</div>
+	<img src="/photos/matthew.png" style="width:140px; padding-top:50px; padding-left:5px">
+        <div class="points center">531 KM</div>
+      </div>
+      <div class="more-info">
+        <h1>Matthew Lee</h1>
+        <div class="coords">
+          <span>Date Of Entry</span>
+          <span>March 2019</span>
+        </div>
+        <div class="coords">
+          <span>Position/Role</span>
+          <span>Brighton, UK</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Shoes</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">2</div>
+          </div>
+          <div>
+            <div class="title">Gait</div>
+            <i class="fa fa-angle-double-down"></i>
+            <div class="value">Mid</div>
+          </div>
+          <div>
+            <div class="title">Cadence</div>
+            <i class="fa fa-group"></i>
+            <div class="value">167</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h1>Matthew Lee</h1>
+      <p style="font-size:28px">Shoe Usage: Critical</p>
+      <p style="font-size:22px">Most Used: Asics Gel-Jolt</p>
+    </div>
+  </div>
+  </div>
+  <div class="column" style="float: left; width: 25%; padding-right:100px;">
+  <div class="card">
+    <div class="additional" style="background:linear-gradient(#decc5e, #eeea6e)">
+      <div class="user-card">
+        <div class="level center">LTA</div>
+	<img src="/photos/cihui.png" style="width:140px; padding-top:50px; padding-left:5px">
+        <div class="points center">312 KM</div>
+      </div>
+      <div class="more-info">
+        <h1>Angeline Lin</h1>
+        <div class="coords">
+          <span>Date Of Entry</span>
+          <span>August 2019</span>
+        </div>
+        <div class="coords">
+          <span>Position/Role</span>
+          <span>London, UK</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Shoes</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">2</div>
+          </div>
+          <div>
+            <div class="title">Gait</div>
+            <i class="fa fa-angle-double-down"></i>
+            <div class="value">Mid</div>
+          </div>
+          <div>
+            <div class="title">Cadence</div>
+            <i class="fa fa-group"></i>
+            <div class="value">170</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h1>Angeline Lin</h1>
+      <p style="font-size:28px">Shoe Usage: Medium</p>
+      <p style="font-size:22px">Most Used: Asics Novablast 3</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="additional" style="background:linear-gradient(#decc5e, #eeea6e)">
+      <div class="user-card">
+        <div class="level center">LTA</div>
+	<img src="/photos/zech.png" style="width:140px; padding-top:50px; padding-left:5px">
+        <div class="points center">412 KM</div>
+      </div>
+      <div class="more-info">
+        <h1>Zechariah Yeung</h1>
+        <div class="coords">
+          <span>Date Of Entry</span>
+          <span>June 2021</span>
+        </div>
+        <div class="coords">
+          <span>Position/Role</span>
+          <span>London, UK</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Shoes</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">3</div>
+          </div>
+          <div>
+            <div class="title">Gait</div>
+            <i class="fa fa-angle-double-down"></i>
+            <div class="value">Heel</div>
+          </div>
+          <div>
+            <div class="title">Cadence</div>
+            <i class="fa fa-group"></i>
+            <div class="value">153</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h1>Zechariah Yeung</h1>
+      <p style="font-size:28px">Shoe Usage: Medium</p>
+      <p style="font-size:22px">Most Used: Asics Novablast 3</p>
+    </div>
+  </div>
+
+  </div>
+<div class="column" style="float: left; width: 25%; padding-right:100px;">
+  <div class="card">
+    <div class="additional" style="background:linear-gradient(#5ede68, #325c46)">
+      <div class="user-card">
+        <div class="level center">3SG</div>
+	<img src="/photos/louis.png" style="width:140px; padding-top:50px; padding-left:5px">
+        <div class="points center">117 KM</div>
+      </div>
+      <div class="more-info">
+        <h1>Louis Yong</h1>
+        <div class="coords">
+          <span>Date Of Entry</span>
+          <span>December 2022</span>
+        </div>
+        <div class="coords">
+          <span>Position/Role</span>
+          <span>Bristol, UK</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Shoes</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">4</div>
+          </div>
+          <div>
+            <div class="title">Gait</div>
+            <i class="fa fa-angle-double-down"></i>
+            <div class="value">Mid</div>
+          </div>
+          <div>
+            <div class="title">Cadence</div>
+            <i class="fa fa-group"></i>
+            <div class="value">173</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h1>Louis Yong</h1>
+      <p style="font-size:28px">Shoe Usage: Light</p>
+      <p style="font-size:22px">Most Used: New Balance ME565V7</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="additional" style="background:linear-gradient(#5ede68, #325c46)">
+      <div class="user-card">
+        <div class="level center">CPT</div>
+	<img src="/photos/joel.png" style="width:140px; padding-top:50px; padding-left:5px">
+        <div class="points center">171 KM</div>
+      </div>
+      <div class="more-info">
+        <h1>Joel Ng</h1>
+        <div class="coords">
+          <span>Date Of Entry</span>
+          <span>April 2023</span>
+        </div>
+        <div class="coords">
+          <span>Position/Role</span>
+          <span>Manchester, UK</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Shoes</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">4</div>
+          </div>
+          <div>
+            <div class="title">Gait</div>
+            <i class="fa fa-angle-double-down"></i>
+            <div class="value">Toe</div>
+          </div>
+          <div>
+            <div class="title">Cadence</div>
+            <i class="fa fa-group"></i>
+            <div class="value">163</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h1>Joel Ng</h1>
+      <p style="font-size:28px">Shoe Usage: Light</p>
+      <p style="font-size:22px">Most Used: Asics Novablast 3</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<table id="alerts">
+  <tr>
+    <th style="padding-left:15px">Alert</th>
+    <th style="padding-left:15px">Description</th>
+    <th style="padding-left:15px">Action</th>
+  </tr>
+  <tr id="resolved1Row">
+    <td>STOCK LOW</td>
+    <td><i>Stock of New Balance ME565v7 at low levels (Remaining: 5)</i></td>
+    <td><button style="background-color: #04AA6D; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id="resolved1">Resolved</button></td>
+  </tr>
+  <tr id="resolved2Row">
+    <td>DELAYED ORDER</td>
+    <td><i>Shipment of New Balance ME565v7 delayed (Estimated Arrival: 8 MAR 2024)</i></td>
+    <td><button style="background-color: #04AA6D; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id="resolved2">Resolved</button></td>
+  </tr>
+</table>
